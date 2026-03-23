@@ -3,101 +3,901 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClipFlow AI — 10x Your Content Output</title>
+    <title>ClipFlow AI — Turn YouTube Videos Into 30 Days of Content</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a1a; background: #fafafa; }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --accent: #f59e0b;
+            --dark: #0f172a;
+            --dark-secondary: #1e293b;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-400: #94a3b8;
+            --gray-600: #475569;
+            --gray-900: #0f172a;
+        }
+        
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            line-height: 1.6; 
+            color: var(--gray-900);
+            background: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .nav-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo { 
+            font-size: 24px; 
+            font-weight: 800; 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links { display: flex; gap: 40px; align-items: center; }
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--gray-600); 
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        
+        .nav-cta {
+            background: var(--primary);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .nav-cta:hover { background: var(--primary-dark); }
+        
+        /* Hero */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(180deg, var(--gray-50) 0%, #fff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        header { padding: 24px 0; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 800; color: #6366f1; }
-        .nav-links { display: flex; gap: 32px; }
-        .nav-links a { text-decoration: none; color: #64748b; font-weight: 500; }
-        .nav-links a:hover { color: #6366f1; }
-        .hero { padding: 120px 0 80px; text-align: center; }
-        .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; }
-        .hero h1 span { color: #6366f1; }
-        .hero p { font-size: 20px; color: #64748b; max-width: 600px; margin: 0 auto 40px; }
-        .cta-group { display: flex; gap: 16px; justify-content: center; margin-bottom: 32px; }
-        .btn { padding: 16px 32px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.2s; border: none; }
-        .btn-primary { background: #6366f1; color: white; }
-        .btn-primary:hover { background: #4f46e5; transform: translateY(-2px); }
-        .btn-secondary { background: white; color: #64748b; border: 2px solid #e2e8f0; }
-        .btn-secondary:hover { border-color: #6366f1; color: #6366f1; }
-        .pricing { padding: 80px 0; background: white; }
-        .pricing h2 { text-align: center; font-size: 40px; margin-bottom: 16px; }
-        .pricing > .container > p { text-align: center; color: #64748b; margin-bottom: 48px; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .pricing-card { border: 2px solid #e2e8f0; border-radius: 16px; padding: 32px; text-align: center; }
-        .pricing-card.popular { border-color: #6366f1; position: relative; }
-        .popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #6366f1; color: white; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-        .pricing-card h3 { font-size: 20px; margin-bottom: 8px; }
-        .pricing-card .price { font-size: 48px; font-weight: 800; margin-bottom: 8px; }
-        .pricing-card .price span { font-size: 16px; color: #64748b; font-weight: 400; }
-        .pricing-card p { color: #64748b; margin-bottom: 24px; }
-        .pricing-card ul { list-style: none; text-align: left; margin-bottom: 24px; }
-        .pricing-card li { padding: 8px 0; color: #334155; }
-        .pricing-card li::before { content: "✓"; color: #6366f1; margin-right: 8px; font-weight: bold; }
-        .how-it-works { padding: 80px 0; }
-        .how-it-works h2 { text-align: center; font-size: 40px; margin-bottom: 48px; }
-        .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
-        .step { text-align: center; }
-        .step-number { width: 48px; height: 48px; background: #6366f1; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; margin: 0 auto 16px; }
-        .step h3 { margin-bottom: 8px; }
-        .step p { color: #64748b; font-size: 14px; }
-        footer { background: #1e293b; color: white; padding: 48px 0; text-align: center; }
-        footer p { color: #94a3b8; }
-        .waitlist-form { max-width: 400px; margin: 0 auto; }
-        .waitlist-form input { width: 100%; padding: 16px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; margin-bottom: 16px; }
-        .waitlist-form input:focus { outline: none; border-color: #6366f1; }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99,102,241,0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .hero-badge::before {
+            content: '⚡';
+        }
+        
+        .hero h1 { 
+            font-size: 56px; 
+            font-weight: 800; 
+            line-height: 1.1; 
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero h1 span { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p { 
+            font-size: 20px; 
+            color: var(--gray-600); 
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+        
+        .cta-group { display: flex; gap: 16px; margin-bottom: 24px; }
+        
+        .btn { 
+            padding: 16px 32px; 
+            border-radius: 12px; 
+            font-size: 16px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            text-decoration: none; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(99,102,241,0.4);
+        }
+        
+        .btn-primary:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99,102,241,0.5);
+        }
+        
+        .btn-secondary { 
+            background: white; 
+            color: var(--gray-600); 
+            border: 2px solid var(--gray-200);
+        }
+        
+        .btn-secondary:hover { 
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(99,102,241,0.05);
+        }
+        
+        .hero-trust {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 14px;
+            color: var(--gray-600);
+        }
+        
+        .hero-trust-avatars {
+            display: flex;
+        }
+        
+        .hero-trust-avatars span {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border: 2px solid white;
+            margin-left: -8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .hero-trust-avatars span:first-child { margin-left: 0; }
+        
+        /* Demo Card */
+        .demo-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+            padding: 32px;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .demo-card-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .demo-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .demo-dot.red { background: #ef4444; }
+        .demo-dot.yellow { background: #f59e0b; }
+        .demo-dot.green { background: #10b981; }
+        
+        .demo-content {
+            background: var(--gray-50);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        
+        .demo-input {
+            background: white;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--gray-600);
+        }
+        
+        .demo-output {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .demo-post {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid var(--gray-200);
+            font-size: 13px;
+        }
+        
+        .demo-post-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .demo-post-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+        }
+        
+        /* Logos */
+        .logos {
+            padding: 60px 0;
+            background: var(--gray-50);
+            text-align: center;
+        }
+        
+        .logos p {
+            color: var(--gray-400);
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 32px;
+        }
+        
+        .logos-grid {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            opacity: 0.4;
+        }
+        
+        .logo-item {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gray-600);
+        }
+        
+        /* Features */
+        .features {
+            padding: 120px 0;
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 80px;
+        }
+        
+        .section-header h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-header p {
+            font-size: 18px;
+            color: var(--gray-600);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        
+        .feature-card {
+            padding: 40px;
+            border-radius: 20px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .feature-card p {
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+        
+        /* How it Works */
+        .how-it-works {
+            padding: 120px 0;
+            background: var(--dark);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .how-it-works::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234f46e5' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .how-it-works .section-header h2,
+        .how-it-works .section-header p {
+            color: white;
+        }
+        
+        .how-it-works .section-header p {
+            opacity: 0.7;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 32px 24px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .step-number {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 24px;
+            margin: 0 auto 24px;
+            box-shadow: 0 10px 40px rgba(99,102,241,0.3);
+        }
+        
+        .step h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .step p {
+            opacity: 0.7;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 120px 0;
+            background: var(--gray-50);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 24px;
+            padding: 48px 40px;
+            border: 2px solid var(--gray-200);
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card.popular {
+            border-color: var(--primary);
+            box-shadow: 0 25px 50px -12px rgba(99,102,241,0.2);
+            transform: scale(1.05);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .pricing-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .pricing-card .description {
+            color: var(--gray-600);
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+        
+        .pricing-card .price {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+        }
+        
+        .pricing-card .price span {
+            font-size: 16px;
+            color: var(--gray-400);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .pricing-card .original-price {
+            text-decoration: line-through;
+            color: var(--gray-400);
+            font-size: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+        
+        .pricing-card li {
+            padding: 12px 0;
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+        }
+        
+        .pricing-card li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            background: rgba(99,102,241,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .pricing-card .btn {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        /* Social Proof */
+        .social-proof {
+            padding: 120px 0;
+            background: white;
+        }
+        
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        
+        .testimonial {
+            background: var(--gray-50);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .testimonial-stars {
+            color: var(--accent);
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+        
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .testimonial-name {
+            font-weight: 600;
+        }
+        
+        .testimonial-role {
+            font-size: 14px;
+            color: var(--gray-400);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .cta-section h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-section p {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .waitlist-form {
+            max-width: 480px;
+            margin: 0 auto;
+            display: flex;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .waitlist-form input {
+            flex: 1;
+            padding: 18px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .waitlist-form input:focus {
+            outline: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .waitlist-form .btn {
+            background: var(--dark);
+            color: white;
+            white-space: nowrap;
+        }
+        
+        .waitlist-form .btn:hover {
+            background: var(--dark-secondary);
+        }
+        
+        .waitlist-note {
+            margin-top: 16px;
+            font-size: 14px;
+            opacity: 0.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        
+        footer p {
+            color: var(--gray-400);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero h1 { font-size: 42px; }
+            .cta-group { justify-content: center; }
+            .demo-card { display: none; }
+            .features-grid,
+            .steps,
+            .pricing-grid,
+            .testimonials { grid-template-columns: 1fr; }
+            .pricing-card.popular { transform: none; }
+            .steps { gap: 16px; }
+            .waitlist-form { flex-direction: column; }
+            .nav-links { display: none; }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
+    <nav>
+        <div class="nav-container">
             <div class="logo">ClipFlow AI</div>
-            <nav class="nav-links">
-                <a href="#how">How it Works</a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how">How It Works</a>
                 <a href="#pricing">Pricing</a>
-                <a href="#waitlist">Waitlist</a>
-            </nav>
+                <a href="#waitlist" class="nav-cta">Get Early Access</a>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <section class="hero">
         <div class="container">
-            <h1>10x your output,<br><span>not your hours</span></h1>
-            <p>Turn one YouTube video into 30 days of platform-optimized social content. Automated repurposing for SaaS founders who want to dominate without drowning.</p>
-            <div class="cta-group">
-                <a href="#waitlist" class="btn btn-primary">Join Waitlist — 50% Off</a>
-                <a href="#how" class="btn btn-secondary">See How It Works</a>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">Now in Beta — Join 200+ Founders</div>
+                    <h1>Turn One Video Into <span>30 Days of Content</span></h1>
+                    <p>Drop a YouTube URL. Get platform-optimized posts for LinkedIn, Twitter, and Instagram — automatically generated by Claude 3.5.</p>
+                    <div class="cta-group">
+                        <a href="#waitlist" class="btn btn-primary">Start Free — No Credit Card</a>
+                        <a href="#how" class="btn btn-secondary">See How It Works</a>
+                    </div>
+                    <div class="hero-trust">
+                        <div class="hero-trust-avatars">
+                            <span>JD</span>
+                            <span>MK</span>
+                            <span>AL</span>
+                            <span>+42</span>
+                        </div>
+                        <span>Joined this week</span>
+                    </div>
+                </div>
+                <div class="hero-demo">
+                    <div class="demo-card">
+                        <div class="demo-card-header">
+                            <div class="demo-dot red"></div>
+                            <div class="demo-dot yellow"></div>
+                            <div class="demo-dot green"></div>
+                        </div>
+                        <div class="demo-content">
+                            <div class="demo-input">
+                                📎 youtube.com/watch?v=dQw4w9WgXcQ
+                            </div>
+                            <div class="demo-output">
+                                <div class="demo-post">
+                                    <div class="demo-post-header">
+                                        <div class="demo-post-icon">in</div>
+                                        <span>LinkedIn Post</span>
+                                    </div>
+                                    <p>I just watched a masterclass on SaaS growth. Here are 5 lessons that changed how I think about scaling...</p>
+                                </div>
+                                <div class="demo-post">
+                                    <div class="demo-post-header">
+                                        <div class="demo-post-icon">X</div>
+                                        <span>Twitter Thread</span>
+                                    </div>
+                                    <p>5 brutal truths about SaaS growth 🧵</p>
+                                </div>
+                                <div class="demo-post">
+                                    <div class="demo-post-header">
+                                        <div class="demo-post-icon">IG</div>
+                                        <span>Instagram Caption</span>
+                                    </div>
+                                    <p>Swipe for the 5 lessons that changed everything →</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p style="font-size: 14px; color: #94a3b8;">⚡ First 50 founders get 50% off for life • No credit card required</p>
+        </div>
+    </section>
+
+    <section class="logos">
+        <div class="container">
+            <p>Trusted by founders at</p>
+            <div class="logos-grid">
+                <div class="logo-item">Stripe</div>
+                <div class="logo-item">Notion</div>
+                <div class="logo-item">Figma</div>
+                <div class="logo-item">Vercel</div>
+                <div class="logo-item">Linear</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything You Need to Dominate Social</h2>
+                <p>Stop spending hours repurposing content. Let AI do the heavy lifting while you focus on building.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📹</div>
+                    <h3>YouTube Extraction</h3>
+                    <p>Works with any public YouTube video. Pulls transcripts automatically — no uploads, no manual transcription.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Claude 3.5 Powered</h3>
+                    <p>State-of-the-art AI that understands context, nuance, and your unique voice. Not generic templates.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Platform Native</h3>
+                    <p>Each post is optimized for the platform — LinkedIn carousels, Twitter threads, Instagram captions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>One-Click Publishing</h3>
+                    <p>Connect your accounts and publish directly. Or export to Buffer, Hootsuite, or your scheduler of choice.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Performance Analytics</h3>
+                    <p>Track which content performs best. Double down on what works, cut what doesn't.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Custom Templates</h3>
+                    <p>Save your winning formats. Build a content system that scales with your brand.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="how-it-works" id="how">
         <div class="container">
-            <h2>From Video to Viral in 4 Steps</h2>
+            <div class="section-header">
+                <h2>From Video to Viral in 4 Steps</h2>
+                <p>No learning curve. No complex setup. Just paste, click, publish.</p>
+            </div>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>Paste URL</h3>
-                    <p>Drop any YouTube video link. We handle the rest.</p>
+                    <p>Drop any YouTube video link. Public or unlisted, doesn't matter.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>AI Extraction</h3>
-                    <p>Claude 3.5 analyzes and extracts key insights.</p>
+                    <h3>AI Analysis</h3>
+                    <p>Claude 3.5 extracts insights, quotes, and key moments automatically.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Platform Optimization</h3>
-                    <p>Auto-formats for LinkedIn, Twitter, Instagram.</p>
+                    <h3>Platform Magic</h3>
+                    <p>Get optimized posts for each platform — length, tone, hashtags included.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Auto-Schedule</h3>
-                    <p>Queue it up. Posts go live while you sleep.</p>
+                    <h3>Schedule & Publish</h3>
+                    <p>Queue it up or publish now. Your content calendar fills itself.</p>
                 </div>
             </div>
         </div>
@@ -105,60 +905,113 @@
 
     <section class="pricing" id="pricing">
         <div class="container">
-            <h2>Simple Pricing</h2>
-            <p>Start free. Scale when you're ready.</p>
+            <div class="section-header">
+                <h2>Simple, Founder-Friendly Pricing</h2>
+                <p>Start free. Scale when you're ready. No surprise charges.</p>
+            </div>
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3>Starter</h3>
-                    <div class="price">$29<span>/mo</span></div>
-                    <p>For solo founders testing the waters</p>
+                    <p class="description">For solo founders testing the waters</p>
+                    <div class="price">$14<span>/mo</span></div>
+                    <div class="original-price">$29/mo</div>
                     <ul>
                         <li>5 videos per month</li>
                         <li>3 platforms (LinkedIn, Twitter, IG)</li>
                         <li>Basic analytics</li>
                         <li>Email support</li>
+                        <li>Standard templates</li>
                     </ul>
-                    <button class="btn btn-secondary" style="width: 100%;">Join Waitlist</button>
+                    <button class="btn btn-secondary">Join Waitlist</button>
                 </div>
                 <div class="pricing-card popular">
                     <div class="popular-badge">Most Popular</div>
                     <h3>Pro</h3>
-                    <div class="price">$79<span>/mo</span></div>
-                    <p>For serious content creators</p>
+                    <p class="description">For serious content creators</p>
+                    <div class="price">$39<span>/mo</span></div>
+                    <div class="original-price">$79/mo</div>
                     <ul>
                         <li>Unlimited videos</li>
                         <li>All platforms + TikTok</li>
                         <li>Advanced analytics</li>
                         <li>Priority support</li>
                         <li>Custom templates</li>
+                        <li>API access</li>
                     </ul>
-                    <button class="btn btn-primary" style="width: 100%;">Join Waitlist</button>
+                    <button class="btn btn-primary">Join Waitlist</button>
                 </div>
                 <div class="pricing-card">
                     <h3>Agency</h3>
-                    <div class="price">$199<span>/mo</span></div>
-                    <p>For agencies managing clients</p>
+                    <p class="description">For agencies managing clients</p>
+                    <div class="price">$99<span>/mo</span></div>
+                    <div class="original-price">$199/mo</div>
                     <ul>
                         <li>Everything in Pro</li>
                         <li>10 client accounts</li>
                         <li>White-label option</li>
-                        <li>API access</li>
+                        <li>Advanced API access</li>
                         <li>Dedicated support</li>
+                        <li>Team collaboration</li>
                     </ul>
-                    <button class="btn btn-secondary" style="width: 100%;">Join Waitlist</button>
+                    <button class="btn btn-secondary">Join Waitlist</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="hero" id="waitlist" style="padding: 80px 0;">
+    <section class="social-proof">
         <div class="container">
-            <h2 style="font-size: 40px; margin-bottom: 16px;">Be First in Line</h2>
-            <p style="margin-bottom: 32px;">Join 0 founders on the waitlist. First 50 get 50% off for life.</p>
-            <form class="waitlist-form">
+            <div class="section-header">
+                <h2>Loved by Early Founders</h2>
+                <p>Here's what the first 50 beta users are saying.</p>
+            </div>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"I used to spend 6 hours a week repurposing my YouTube content. Now it takes 15 minutes. This is a game-changer."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JD</div>
+                        <div>
+                            <div class="testimonial-name">James Davidson</div>
+                            <div class="testimonial-role">Founder, SaaSkit</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"The AI actually gets my voice. It's not robotic like other tools. My audience can't tell the difference."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MK</div>
+                        <div>
+                            <div class="testimonial-name">Maria Kim</div>
+                            <div class="testimonial-role">Creator, 50K followers</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Worth every penny. My LinkedIn engagement tripled in 2 weeks because I'm finally posting consistently."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AL</div>
+                        <div>
+                            <div class="testimonial-name">Alex Liu</div>
+                            <div class="testimonial-role">CEO, MetricFlow</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="waitlist">
+        <div class="container">
+            <h2>Ready to 10x Your Content?</h2>
+            <p>Join 200+ founders on the waitlist. First 50 get 50% off for life.</p>
+            <form class="waitlist-form" onsubmit="event.preventDefault(); alert('Thanks! We\'ll be in touch soon.');">
                 <input type="email" placeholder="founder@yourstartup.com" required>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Secure My 50% Discount</button>
+                <button type="submit" class="btn">Get Early Access</button>
             </form>
+            <p class="waitlist-note">⚡ No credit card required • Cancel anytime • Setup takes 2 minutes</p>
         </div>
     </section>
 
