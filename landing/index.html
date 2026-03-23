@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipFlow AI — 10x Your Content Output</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a1a; background: #fafafa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        header { padding: 24px 0; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 800; color: #6366f1; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { text-decoration: none; color: #64748b; font-weight: 500; }
+        .nav-links a:hover { color: #6366f1; }
+        .hero { padding: 120px 0 80px; text-align: center; }
+        .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; }
+        .hero h1 span { color: #6366f1; }
+        .hero p { font-size: 20px; color: #64748b; max-width: 600px; margin: 0 auto 40px; }
+        .cta-group { display: flex; gap: 16px; justify-content: center; margin-bottom: 32px; }
+        .btn { padding: 16px 32px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.2s; border: none; }
+        .btn-primary { background: #6366f1; color: white; }
+        .btn-primary:hover { background: #4f46e5; transform: translateY(-2px); }
+        .btn-secondary { background: white; color: #64748b; border: 2px solid #e2e8f0; }
+        .btn-secondary:hover { border-color: #6366f1; color: #6366f1; }
+        .pricing { padding: 80px 0; background: white; }
+        .pricing h2 { text-align: center; font-size: 40px; margin-bottom: 16px; }
+        .pricing > .container > p { text-align: center; color: #64748b; margin-bottom: 48px; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .pricing-card { border: 2px solid #e2e8f0; border-radius: 16px; padding: 32px; text-align: center; }
+        .pricing-card.popular { border-color: #6366f1; position: relative; }
+        .popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #6366f1; color: white; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .pricing-card h3 { font-size: 20px; margin-bottom: 8px; }
+        .pricing-card .price { font-size: 48px; font-weight: 800; margin-bottom: 8px; }
+        .pricing-card .price span { font-size: 16px; color: #64748b; font-weight: 400; }
+        .pricing-card p { color: #64748b; margin-bottom: 24px; }
+        .pricing-card ul { list-style: none; text-align: left; margin-bottom: 24px; }
+        .pricing-card li { padding: 8px 0; color: #334155; }
+        .pricing-card li::before { content: "✓"; color: #6366f1; margin-right: 8px; font-weight: bold; }
+        .how-it-works { padding: 80px 0; }
+        .how-it-works h2 { text-align: center; font-size: 40px; margin-bottom: 48px; }
+        .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+        .step { text-align: center; }
+        .step-number { width: 48px; height: 48px; background: #6366f1; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; margin: 0 auto 16px; }
+        .step h3 { margin-bottom: 8px; }
+        .step p { color: #64748b; font-size: 14px; }
+        footer { background: #1e293b; color: white; padding: 48px 0; text-align: center; }
+        footer p { color: #94a3b8; }
+        .waitlist-form { max-width: 400px; margin: 0 auto; }
+        .waitlist-form input { width: 100%; padding: 16px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; margin-bottom: 16px; }
+        .waitlist-form input:focus { outline: none; border-color: #6366f1; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">ClipFlow AI</div>
+            <nav class="nav-links">
+                <a href="#how">How it Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#waitlist">Waitlist</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>10x your output,<br><span>not your hours</span></h1>
+            <p>Turn one YouTube video into 30 days of platform-optimized social content. Automated repurposing for SaaS founders who want to dominate without drowning.</p>
+            <div class="cta-group">
+                <a href="#waitlist" class="btn btn-primary">Join Waitlist — 50% Off</a>
+                <a href="#how" class="btn btn-secondary">See How It Works</a>
+            </div>
+            <p style="font-size: 14px; color: #94a3b8;">⚡ First 50 founders get 50% off for life • No credit card required</p>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how">
+        <div class="container">
+            <h2>From Video to Viral in 4 Steps</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Paste URL</h3>
+                    <p>Drop any YouTube video link. We handle the rest.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Extraction</h3>
+                    <p>Claude 3.5 analyzes and extracts key insights.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Platform Optimization</h3>
+                    <p>Auto-formats for LinkedIn, Twitter, Instagram.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Auto-Schedule</h3>
+                    <p>Queue it up. Posts go live while you sleep.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>Simple Pricing</h2>
+            <p>Start free. Scale when you're ready.</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$29<span>/mo</span></div>
+                    <p>For solo founders testing the waters</p>
+                    <ul>
+                        <li>5 videos per month</li>
+                        <li>3 platforms (LinkedIn, Twitter, IG)</li>
+                        <li>Basic analytics</li>
+                        <li>Email support</li>
+                    </ul>
+                    <button class="btn btn-secondary" style="width: 100%;">Join Waitlist</button>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Pro</h3>
+                    <div class="price">$79<span>/mo</span></div>
+                    <p>For serious content creators</p>
+                    <ul>
+                        <li>Unlimited videos</li>
+                        <li>All platforms + TikTok</li>
+                        <li>Advanced analytics</li>
+                        <li>Priority support</li>
+                        <li>Custom templates</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%;">Join Waitlist</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Agency</h3>
+                    <div class="price">$199<span>/mo</span></div>
+                    <p>For agencies managing clients</p>
+                    <ul>
+                        <li>Everything in Pro</li>
+                        <li>10 client accounts</li>
+                        <li>White-label option</li>
+                        <li>API access</li>
+                        <li>Dedicated support</li>
+                    </ul>
+                    <button class="btn btn-secondary" style="width: 100%;">Join Waitlist</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero" id="waitlist" style="padding: 80px 0;">
+        <div class="container">
+            <h2 style="font-size: 40px; margin-bottom: 16px;">Be First in Line</h2>
+            <p style="margin-bottom: 32px;">Join 0 founders on the waitlist. First 50 get 50% off for life.</p>
+            <form class="waitlist-form">
+                <input type="email" placeholder="founder@yourstartup.com" required>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Secure My 50% Discount</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 ClipFlow AI. Built by founders, for founders.</p>
+        </div>
+    </footer>
+</body>
+</html>
